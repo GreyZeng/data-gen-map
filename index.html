@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据地图生成器</title>
+    <script src="./jquery.min.js"></script>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    header {
+        background-color: #3498db;
+        color: white;
+        text-align: center;
+        padding: 15px 0;
+    }
+
+    .map {
+        width: 100vw;
+        height: 100vh;
+    }
+
+    .map .tab {
+        width: 100%;
+        padding: 10px 0 10px 10px;
+        position: relative;
+    }
+
+    .map .tab div {
+        display: inline-block;
+        padding: 5px 10px;
+        border: 1px solid #ccc;
+        color: #333;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .map .tab .name {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 18px;
+        font-weight: 700;
+    }
+
+    .map .tab .active {
+        background-color: #409EFF;
+        border: 1px solid #fff;
+        color: #fff;
+    }
+    
+    iframe {
+      width: 100vw;
+      height: calc(100vh - 53px);
+    }
+    
+</style>
+<body>
+    <div class="map">
+        <div class="tab">
+            <div id="china">全国</div>
+            <div id="china_heat">全国（热力图）</div>
+            <div id="guangdong">广东</div>
+            <div id="guangdong_heat">广东（热力图）</div>
+            <span class="name" id="name">全国数据地图生成器</span>
+        </div>
+        <div class="iframe">
+            <iframe id="iframe" src="china.html" frameborder="0"></iframe>
+        </div>
+    </div>
+</body>
+<script>
+   $(document).ready(function() {
+        $("#china").addClass("active");
+        $("#china_heat").removeClass("active");
+        $("#guangdong").removeClass("active");
+        $("#guangdong_heat").removeClass("active");
+        let iframe = $('#iframe');
+        $("#china").click(function() {
+            $("#china").addClass("active");
+            $("#china_heat").removeClass("active");
+            $("#guangdong").removeClass("active");
+            $("#guangdong_heat").removeClass("active");
+            $("#name").text('全国数据地图生成器');
+            iframe.attr('src', 'china.html');
+        });
+        $("#china_heat").click(function() {
+            $("#china").removeClass("active");
+            $("#china_heat").addClass("active");
+            $("#guangdong").removeClass("active");
+            $("#guangdong_heat").removeClass("active");
+            $("#name").text('全国数据（热力图）地图生成器');
+            iframe.attr('src', 'china_heat.html');
+        });
+
+        $("#guangdong").click(function() {
+            $("#china").removeClass("active");
+            $("#china_heat").removeClass("active");
+            $("#guangdong").addClass("active");
+            $("#guangdong_heat").removeClass("active");
+            $("#name").text('广东省数据地图生成器');
+            iframe.attr('src', 'guangdong.html');
+        });
+
+        $("#guangdong_heat").click(function() {
+            $("#china").removeClass("active");
+            $("#china_heat").removeClass("active");
+            $("#guangdong").removeClass("active");
+            $("#guangdong_heat").addClass("active");
+            $("#name").text('广东省数据（热力图）地图生成器');
+            iframe.attr('src', 'guangdong_heat.html');
+        });
+    });
+  </script>
+</html>
